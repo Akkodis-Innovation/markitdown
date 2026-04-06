@@ -19,11 +19,10 @@ RUN pip --no-cache-dir install /app
 
 WORKDIR /workdir
 
-# Default USERID and GROUPID
-ARG USERID=nobody
-ARG GROUPID=nogroup
+# Add a shell for debugging
+RUN apt-get update && apt-get install -y --no-install-recommends bash
 
-USER $USERID:$GROUPID
+# Run as root
+USER 0:0
 
-ENTRYPOINT ["markitdown-mcp"]
-CMD ["--http", "--port", "8000", "--host", "0.0.0.0"]
+ENTRYPOINT ["uvicorn", "markitdown_mcp.__main__:create_starlette_app()", "--host", "0.0.0.0", "--port", "8000", "--lifespan", "on"]
