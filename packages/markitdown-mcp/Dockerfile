@@ -25,4 +25,5 @@ ARG GROUPID=nogroup
 
 USER $USERID:$GROUPID
 
-ENTRYPOINT [ "markitdown-mcp" ]
+ENTRYPOINT ["markitdown-mcp"]
+CMD ["--http", "--port", "8000", "--host", "0.0.0.0"]
