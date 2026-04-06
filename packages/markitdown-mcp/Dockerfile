@@ -25,4 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends bash
 # Run as root
 USER 0:0
 
-ENTRYPOINT ["uvicorn", "markitdown_mcp.__main__:create_starlette_app()", "--host", "0.0.0.0", "--port", "8000", "--lifespan", "on"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

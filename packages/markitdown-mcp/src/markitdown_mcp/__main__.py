@@ -78,6 +78,9 @@ def create_starlette_app(mcp_server: Server, *, debug: bool = False) -> Starlett
     )
 
 
+def asgi():
+    return create_starlette_app(mcp._mcp_server, debug=True)
+
 # Main entry point
 def main():
     import argparse
